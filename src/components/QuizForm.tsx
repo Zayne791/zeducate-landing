@@ -154,7 +154,7 @@ export default function QuizForm() {
               >
                 <span className="text-4xl md:text-5xl">🎊</span>
               </motion.div>
-            </div>
+          </div>
             
             {/* Animated rings */}
             <motion.div
@@ -237,8 +237,8 @@ export default function QuizForm() {
             >
               <div className="text-2xl mb-3">🌟</div>
               <p className="text-green-700 font-semibold text-lg">
-                We're excited to help your child succeed!
-              </p>
+            We're excited to help your child succeed!
+          </p>
               <p className="text-green-600 text-sm mt-2">
                 Our expert team is ready to create a personalized learning experience
               </p>
@@ -608,8 +608,8 @@ export default function QuizForm() {
                               <div className="max-h-[70vh] overflow-y-auto p-2">
                                 {(quizData.schoolLevel === 'primary' ? primaryYears : highSchoolYears).map((year, index) => (
                                   <motion.button
-                                    key={year}
-                                    type="button"
+                    key={year}
+                    type="button"
                                     onClick={() => {
                                       handleYearLevel(year);
                                       setQuizData(prev => ({ ...prev, showYearDropdown: false }));
@@ -634,10 +634,22 @@ export default function QuizForm() {
                                         {year}
                                       </span>
                                       <div className="text-sm text-gray-500 group-hover:text-primary-600 transition-colors duration-300">
-                                        {year.includes('Kindergarten') ? 'Early learning foundation' : 
-                                         year.includes('Year 1') ? 'Beginning primary school' :
-                                         year.includes('Year 6') ? 'Preparing for high school' :
-                                         year.includes('Year 12') ? 'Final year of school' : 'School year'}
+                                        {quizData.schoolLevel === 'primary' ? (
+                                          year.includes('Kindergarten') ? 'Early learning foundation' : 
+                                          year.includes('Year 1') ? 'Beginning primary school' :
+                                          year.includes('Year 2') ? 'Building foundational skills' :
+                                          year.includes('Year 3') ? 'Developing core competencies' :
+                                          year.includes('Year 4') ? 'Strengthening academic skills' :
+                                          year.includes('Year 5') ? 'Preparing for upper primary' :
+                                          year.includes('Year 6') ? 'Preparing for high school' : 'Primary school year'
+                                        ) : (
+                                          year.includes('Year 7') ? 'First year of high school' :
+                                          year.includes('Year 8') ? 'Building high school foundation' :
+                                          year.includes('Year 9') ? 'Developing study skills' :
+                                          year.includes('Year 10') ? 'Preparing for senior years' :
+                                          year.includes('Year 11') ? 'Senior high school year' :
+                                          year.includes('Year 12') ? 'Final year of school' : 'High school year'
+                                        )}
                                       </div>
                                     </div>
                                     <motion.div
@@ -691,9 +703,29 @@ export default function QuizForm() {
                                       {year.includes('Kindergarten') ? 'K' : year.split(' ')[1]}
                                     </span>
                                   </div>
-                                  <span className="text-lg font-medium text-gray-800 group-hover:text-primary-700 transition-colors duration-200">
-                                    {year}
-                                  </span>
+                                  <div className="flex-1">
+                                    <span className="text-lg font-medium text-gray-800 group-hover:text-primary-700 transition-colors duration-200">
+                                      {year}
+                                    </span>
+                                    <div className="text-sm text-gray-500 group-hover:text-primary-600 transition-colors duration-200">
+                                      {quizData.schoolLevel === 'primary' ? (
+                                        year.includes('Kindergarten') ? 'Early learning foundation' : 
+                                        year.includes('Year 1') ? 'Beginning primary school' :
+                                        year.includes('Year 2') ? 'Building foundational skills' :
+                                        year.includes('Year 3') ? 'Developing core competencies' :
+                                        year.includes('Year 4') ? 'Strengthening academic skills' :
+                                        year.includes('Year 5') ? 'Preparing for upper primary' :
+                                        year.includes('Year 6') ? 'Preparing for high school' : 'Primary school year'
+                                      ) : (
+                                        year.includes('Year 7') ? 'First year of high school' :
+                                        year.includes('Year 8') ? 'Building high school foundation' :
+                                        year.includes('Year 9') ? 'Developing study skills' :
+                                        year.includes('Year 10') ? 'Preparing for senior years' :
+                                        year.includes('Year 11') ? 'Senior high school year' :
+                                        year.includes('Year 12') ? 'Final year of school' : 'High school year'
+                                      )}
+                                    </div>
+                                  </div>
                                 </motion.button>
                               ))}
                             </div>
@@ -733,15 +765,15 @@ export default function QuizForm() {
                   <div className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-4 pb-4">
                     {subjects.map((subject, index) => (
                       <motion.div
-                        key={subject}
+                    key={subject}
                         className="flex-shrink-0 w-[280px] snap-center"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
                         <motion.button
-                          type="button"
-                          onClick={() => handleSubjectToggle(subject)}
+                    type="button"
+                    onClick={() => handleSubjectToggle(subject)}
                           className={`group relative overflow-hidden bg-gradient-to-br from-white to-gray-50 border-2 rounded-xl p-6 hover:border-primary-300 hover:shadow-lg transition-all duration-300 transform hover:scale-105 w-full h-[200px] flex flex-col items-center justify-center ${
                             quizData.subjects.includes(subject) 
                               ? 'border-primary-500 bg-primary-50 shadow-lg shadow-primary-500/20' 
@@ -762,8 +794,8 @@ export default function QuizForm() {
                                 : 'bg-gradient-to-br from-primary-100 to-primary-200 group-hover:from-primary-200 group-hover:to-primary-300'
                             }`}>
                               <span className="text-3xl">
-                                {subject === 'Mathematics' ? '📐' : subject === 'English' ? '📚' : '🎯'}
-                              </span>
+                      {subject === 'Mathematics' ? '📐' : subject === 'English' ? '📚' : '🎯'}
+                    </span>
                             </div>
                             <h3 className={`text-xl font-bold transition-colors duration-300 mb-2 ${
                               quizData.subjects.includes(subject)
@@ -793,8 +825,8 @@ export default function QuizForm() {
                           )}
                         </motion.button>
                       </motion.div>
-                    ))}
-                  </div>
+                ))}
+              </div>
                   
                   {/* Scroll indicator */}
                   <div className="flex justify-center mt-4 space-x-2">
@@ -813,7 +845,7 @@ export default function QuizForm() {
                 {subjects.map((subject, index) => (
                   <motion.button
                     key={subject}
-                    type="button"
+                type="button"
                     onClick={() => handleSubjectToggle(subject)}
                     className={`group relative overflow-hidden bg-gradient-to-br from-white to-gray-50 border-2 rounded-2xl p-8 transition-all duration-300 transform hover:scale-105 w-full ${
                       quizData.subjects.includes(subject) 
@@ -971,7 +1003,7 @@ export default function QuizForm() {
                     >
                       <span className="text-4xl md:text-5xl">🎉</span>
                     </motion.div>
-                  </div>
+              </div>
                   
                   {/* Animated rings */}
                   <motion.div
@@ -1112,9 +1144,9 @@ export default function QuizForm() {
                     placeholder="Enter your first name"
                       required
                     autoFocus
-                  />
+                    />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                  </div>
                 <motion.button
                   type="button"
                   onClick={handleFirstName}
@@ -1162,7 +1194,7 @@ export default function QuizForm() {
                     autoFocus
                     />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                  </div>
                 <motion.button
                   type="button"
                   onClick={handleLastName}
@@ -1173,7 +1205,7 @@ export default function QuizForm() {
                 >
                   Continue
                 </motion.button>
-              </div>
+                </div>
             </motion.div>
           )}
 
@@ -1306,7 +1338,7 @@ export default function QuizForm() {
                     autoFocus
                     />
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+                  </div>
                 <motion.button
                   type="button"
                   onClick={handlePhone}
