@@ -9,7 +9,6 @@
   
   html {
     @apply h-full antialiased;
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     touch-action: manipulation;
   }
@@ -21,6 +20,24 @@
 
   #__next {
     @apply min-h-screen;
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -49,10 +66,10 @@
   .quiz-card {
     @apply relative bg-white rounded-2xl
            shadow-lg border border-gray-200
-           p-6 sm:p-8 md:p-10
+           p-4 sm:p-6 md:p-8
            w-[calc(100%-2rem)] sm:w-full
            max-w-3xl mx-auto
-           mt-8;
+           max-h-[90vh] overflow-y-auto;
   }
 
   .quiz-progress {
@@ -77,6 +94,15 @@
     @apply border-primary-500 bg-primary-50
            text-primary-700 shadow-md
            scale-[1.02] font-semibold;
+  }
+
+  /* Hide scrollbar but maintain scroll functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
   }
 
   /* Mobile optimization */
