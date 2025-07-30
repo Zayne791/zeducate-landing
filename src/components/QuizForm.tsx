@@ -566,44 +566,141 @@ export default function QuizForm() {
                   </motion.button>
 
                   {/* Custom dropdown menu */}
-                  <AnimatePresence>
-                    {quizData.showYearDropdown && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-primary-200 rounded-xl shadow-xl z-50 overflow-hidden"
-                      >
-                        <div className="max-h-60 overflow-y-auto">
-                          {(quizData.schoolLevel === 'primary' ? primaryYears : highSchoolYears).map((year, index) => (
-                            <motion.button
-                              key={year}
-                              type="button"
-                              onClick={() => {
-                                handleYearLevel(year);
-                                setQuizData(prev => ({ ...prev, showYearDropdown: false }));
-                              }}
-                              className="w-full px-6 py-4 text-left hover:bg-primary-50 transition-all duration-200 flex items-center space-x-3 group"
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: index * 0.05 }}
-                              whileHover={{ backgroundColor: "#f0f9ff" }}
+                                      <AnimatePresence>
+                      {quizData.showYearDropdown && (
+                        <>
+                          {/* Mobile: Sexy modal-style dropdown */}
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="md:hidden fixed inset-0 bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                            onClick={() => setQuizData(prev => ({ ...prev, showYearDropdown: false }))}
+                          >
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.7, y: 30 }}
+                              animate={{ opacity: 1, scale: 1, y: 0 }}
+                              exit={{ opacity: 0, scale: 0.7, y: 30 }}
+                              transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+                              className="bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-2xl w-full max-w-sm max-h-[85vh] overflow-hidden border border-gray-100"
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              <div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-200">
-                                <span className="text-sm font-bold text-primary-700">
-                                  {year.includes('Kindergarten') ? 'K' : year.split(' ')[1]}
-                                </span>
+                              {/* Sexy header */}
+                              <div className="bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-white relative overflow-hidden">
+                                <motion.div
+                                  animate={{ rotate: 360 }}
+                                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                  className="absolute -top-4 -right-4 w-16 h-16 bg-white/20 rounded-full"
+                                />
+                                <motion.div
+                                  animate={{ scale: [1, 1.1, 1] }}
+                                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                  className="text-center"
+                                >
+                                  <div className="text-3xl mb-2">🎓</div>
+                                  <h3 className="text-xl font-bold">Choose Your Year</h3>
+                                  <p className="text-primary-100 text-sm mt-1">Select your child's current grade</p>
+                                </motion.div>
                               </div>
-                              <span className="text-lg font-medium text-gray-800 group-hover:text-primary-700 transition-colors duration-200">
-                                {year}
-                              </span>
-                            </motion.button>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+
+                              {/* Sexy content */}
+                              <div className="max-h-[70vh] overflow-y-auto p-2">
+                                {(quizData.schoolLevel === 'primary' ? primaryYears : highSchoolYears).map((year, index) => (
+                                  <motion.button
+                                    key={year}
+                                    type="button"
+                                    onClick={() => {
+                                      handleYearLevel(year);
+                                      setQuizData(prev => ({ ...prev, showYearDropdown: false }));
+                                    }}
+                                    className="w-full p-4 text-left hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50 transition-all duration-300 flex items-center space-x-4 group rounded-2xl m-2 hover:shadow-lg hover:scale-[1.02] border border-transparent hover:border-primary-200"
+                                    initial={{ opacity: 0, x: -30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.08, type: "spring", duration: 0.6 }}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                  >
+                                    <motion.div 
+                                      className="w-14 h-14 bg-gradient-to-br from-primary-200 to-primary-300 rounded-2xl flex items-center justify-center group-hover:from-primary-300 group-hover:to-primary-400 transition-all duration-300 shadow-lg group-hover:shadow-xl"
+                                      whileHover={{ rotate: 5, scale: 1.1 }}
+                                    >
+                                      <span className="text-xl font-bold text-primary-700 group-hover:text-primary-800">
+                                        {year.includes('Kindergarten') ? 'K' : year.split(' ')[1]}
+                                      </span>
+                                    </motion.div>
+                                    <div className="flex-1">
+                                      <span className="text-lg font-semibold text-gray-800 group-hover:text-primary-700 transition-colors duration-300">
+                                        {year}
+                                      </span>
+                                      <div className="text-sm text-gray-500 group-hover:text-primary-600 transition-colors duration-300">
+                                        {year.includes('Kindergarten') ? 'Early learning foundation' : 
+                                         year.includes('Year 1') ? 'Beginning primary school' :
+                                         year.includes('Year 6') ? 'Preparing for high school' :
+                                         year.includes('Year 12') ? 'Final year of school' : 'School year'}
+                                      </div>
+                                    </div>
+                                    <motion.div
+                                      initial={{ opacity: 0, x: 10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: index * 0.08 + 0.2 }}
+                                      className="text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    >
+                                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </motion.div>
+                                  </motion.button>
+                                ))}
+                              </div>
+
+                              {/* Sexy footer */}
+                              <div className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200">
+                                <p className="text-center text-sm text-gray-500">
+                                  Tap outside to close
+                                </p>
+                              </div>
+                            </motion.div>
+                          </motion.div>
+
+                          {/* Desktop: Traditional dropdown */}
+                          <motion.div
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                            transition={{ duration: 0.2 }}
+                            className="hidden md:block absolute top-full left-0 right-0 mt-2 bg-white border-2 border-primary-200 rounded-xl shadow-xl z-50 overflow-hidden"
+                          >
+                            <div className="max-h-60 overflow-y-auto">
+                              {(quizData.schoolLevel === 'primary' ? primaryYears : highSchoolYears).map((year, index) => (
+                                <motion.button
+                                  key={year}
+                                  type="button"
+                                  onClick={() => {
+                                    handleYearLevel(year);
+                                    setQuizData(prev => ({ ...prev, showYearDropdown: false }));
+                                  }}
+                                  className="w-full px-6 py-4 text-left hover:bg-primary-50 transition-all duration-200 flex items-center space-x-3 group"
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: index * 0.05 }}
+                                  whileHover={{ backgroundColor: "#f0f9ff" }}
+                                >
+                                  <div className="w-10 h-10 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center group-hover:from-primary-200 group-hover:to-primary-300 transition-all duration-200">
+                                    <span className="text-sm font-bold text-primary-700">
+                                      {year.includes('Kindergarten') ? 'K' : year.split(' ')[1]}
+                                    </span>
+                                  </div>
+                                  <span className="text-lg font-medium text-gray-800 group-hover:text-primary-700 transition-colors duration-200">
+                                    {year}
+                                  </span>
+                                </motion.button>
+                              ))}
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
                 </motion.div>
               </div>
             </motion.div>
