@@ -323,9 +323,28 @@ export default function ApplicationForm() {
               <input type="text" placeholder="Postcode" value={data.postcode} onChange={(e) => updateData('postcode', e.target.value)} className="w-full px-4 py-4 rounded-xl border-2 border-gray-100 focus:border-primary-500 outline-none" />
             </div>
             <button 
-              onClick={() => {
-                setIsSubmitted(true);
-                console.log('Final Application Data:', data);
+              onClick={async () => {
+                try {
+                  // Track application submission event
+                  if (typeof window !== 'undefined' && (window as any).fbq) {
+                    (window as any).fbq('track', 'Lead');
+                  }
+
+                  // Send data to webhook
+                  await fetch('https://hook.eu2.make.com/2mq868lpqooqlv12xw3cmz3fdcvd6wz2', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                  });
+                  
+                  setIsSubmitted(true);
+                } catch (error) {
+                  console.error('Error submitting application:', error);
+                  // Still show success to user but log error
+                  setIsSubmitted(true);
+                }
               }} 
               disabled={!data.fullName || !data.email || !data.phone || !data.postcode}
               className="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-5 rounded-2xl font-bold text-xl shadow-lg hover:shadow-xl transition-all"
