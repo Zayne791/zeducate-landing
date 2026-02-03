@@ -64,9 +64,6 @@ export default function ApplyHero() {
           >
             <iframe
               src="https://www.loom.com/embed/feaf6be047cd419181a9a7266d1bd9d0?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
-              frameBorder="0"
-              webkitallowfullscreen="true"
-              mozallowfullscreen="true"
               allowFullScreen
               className="absolute inset-0 w-full h-full"
             ></iframe>
