@@ -15,10 +15,15 @@ export default function ApplyPage() {
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '735495399156716');
-          fbq('track', 'PageView', { access_token: 'EAAUGawZBZAeH8BQuAZCsNZCo0envfSkZAB5jZAZCnXRh9fAaCnFksZA09Dgc6aZCIZCK6PZAnPWTA96561PZBfldj7ZAJYOo3IzZBgY6iwnbkw6TP0ZBZCfZCnBr0PKECKqCp8Grn41WLr7iKtuIqNxDzlWMqSjjmHaqblD5ceZBZAlkF6RgPhcP5bsfNgDOIDdhUnVHp0xNecXSQZDZD' });
+          fbq('init', '2210000349532472');
+          fbq('track', 'PageView');
         `}
       </Script>
+      <noscript>
+        <img height="1" width="1" style={{ display: 'none' }}
+          src="https://www.facebook.com/tr?id=2210000349532472&ev=PageView&noscript=1"
+        />
+      </noscript>
       <ApplyHero />
       
       <div id="apply-section" className="relative py-20 flex items-center justify-center">
