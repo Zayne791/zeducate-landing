@@ -55,22 +55,21 @@ export default function ApplyHero() {
             Empower the next generation and build a flexible, rewarding career with Zeducate.
           </motion.p>
 
-          {/* VSL Placeholder */}
+          {/* VSL Video */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="max-w-4xl mx-auto mb-12 aspect-video bg-gray-900 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden border-4 border-white"
+            className="max-w-4xl mx-auto mb-12 aspect-video bg-gray-900 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden border-4 border-white relative"
           >
-            <div className="text-center p-8">
-              <div className="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
-                <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M4.5 3.5v13l11-6.5-11-6.5z" />
-                </svg>
-              </div>
-              <p className="text-white text-xl font-medium">Watch Our Recruitment Video</p>
-              <p className="text-gray-400 mt-2 text-sm">(VSL Video Coming Soon)</p>
-            </div>
+            <iframe
+              src="https://www.loom.com/embed/feaf6be047cd419181a9a7266d1bd9d0?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+              frameBorder="0"
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            ></iframe>
           </motion.div>
 
           {/* Perks badges */}
