@@ -327,7 +327,7 @@ export default function ApplicationForm() {
                 try {
                   // Track application submission event
                   if (typeof window !== 'undefined' && (window as any).fbq) {
-                    (window as any).fbq('track', 'Lead');
+                    (window as any).fbq('trackSingle', '2210000349532472', 'Lead');
                   }
 
                   // Send data to webhook

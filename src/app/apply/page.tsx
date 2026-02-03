@@ -16,7 +16,7 @@ export default function ApplyPage() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '2210000349532472');
-          fbq('track', 'PageView');
+          fbq('trackSingle', '2210000349532472', 'PageView');
         `}
       </Script>
       <noscript>
